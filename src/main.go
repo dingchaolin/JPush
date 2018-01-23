@@ -2,7 +2,10 @@ package main
 
 import (
 	//"jpush"
-	"apns2_test"
+	//"apns2_test"
+	_ "kafka"
+	"kafka"
+	"strconv"
 )
 
 //const (
@@ -13,5 +16,12 @@ import (
 func main() {
 
 	//jpush.Push(appKey, secret)
-	apns2_test.Test()
+	//apns2_test.Test()
+	data := []string{}
+	for i := 0; i < 10; i ++ {
+		data = append(data, strconv.Itoa(i))
+
+	}
+	kafka.SavePushData("ios", "express", data )
+
 }

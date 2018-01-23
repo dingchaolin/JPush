@@ -3,7 +3,7 @@ package kafka
 import (
 	"github.com/Shopify/sarama"
 	"fmt"
-	"strconv"
+	//"strconv"
 	"config"
 	"log"
 )
@@ -12,6 +12,7 @@ var Producer sarama.SyncProducer
 
 func init() {
 	p, err := newProducer()
+	fmt.Println( "-----------",p, err )
 	if err != nil {
 		fmt.Println(err)
 		panic(err)
@@ -26,7 +27,7 @@ func newProducer() (sarama.SyncProducer, error) {
 	configs.Producer.Return.Errors = true
 	configs.Producer.RequiredAcks = sarama.WaitForAll
 	configs.Producer.Partitioner = sarama.NewRandomPartitioner
-	return sarama.NewSyncProducer([]string{config.KafkaServerConfig.Host + ":" + strconv.Itoa(config.KafkaServerConfig.Port)}, configs)
+	return sarama.NewSyncProducer([]string{"192.168.64.185:9092"}, configs)
 }
 
 func SavePushData(deviceOS string, appName string, list []string) int {
