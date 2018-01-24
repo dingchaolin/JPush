@@ -10,6 +10,7 @@ import (
 	"time"
 	"fmt"
 	"runtime"
+	"log"
 )
 
 const (
@@ -56,7 +57,16 @@ func consume_c(){
 	}
 }
 
+func GetNum(){//返回所有的分区id
+	nums, err := kafka.GetPartitionsNums("ios", "express")
+	if err != nil {
+		log.Fatal( err )
+	}
+	fmt.Println( "nums=========================",nums )
+}
+
 func main() {
+	GetNum()
 	//runtime.GOMAXPROCS(4000)
 	//produce(0)
 	consume()

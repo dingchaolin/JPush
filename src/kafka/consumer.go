@@ -30,6 +30,9 @@ func Close()  {
 	consumer.Close()
 }
 
+func GetPartitionsNums(deviceOS string, appName string)([]int32, error){
+	return consumer.Partitions(config.Topic+"_" + deviceOS + "_" + appName)
+}
 func GetNewMessage(deviceOS string, appName string, _partition int32) {
 
 	var offset int64 = 0
