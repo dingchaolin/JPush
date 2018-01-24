@@ -6,13 +6,13 @@ import (
 	//"strconv"
 	"config"
 	"log"
+	"strconv"
 )
 
 var Producer sarama.SyncProducer
 
 func init() {
 	p, err := newProducer()
-	fmt.Println( "-----------",p, err )
 	if err != nil {
 		fmt.Println(err)
 		panic(err)
@@ -27,7 +27,7 @@ func newProducer() (sarama.SyncProducer, error) {
 	configs.Producer.Return.Errors = true
 	configs.Producer.RequiredAcks = sarama.WaitForAll
 	configs.Producer.Partitioner = sarama.NewRandomPartitioner
-	return sarama.NewSyncProducer([]string{"192.168.64.185:9092"}, configs)
+	return sarama.NewSyncProducer([]string{config.KafkaServerConfig.Host + ":" + strconv.Itoa(config.KafkaServerConfig.Port)}, configs)
 }
 
 func SavePushData(deviceOS string, appName string, list []string) int {
@@ -37,7 +37,7 @@ func SavePushData(deviceOS string, appName string, list []string) int {
 	for i := 0; i < len(list); i++ {
 		msg := &sarama.ProducerMessage{
 			Topic:     config.Topic + "_" + deviceOS + "_" + appName,
-			//Partition: int32(1),//不指定分区 就会将数据平均的写到所有的分区上去
+			Partition: int32(1),//不指定分区 就会将数据平均的写到所有的分区上去
 			Key:       sarama.StringEncoder(""),
 			Value:     sarama.StringEncoder(list[i]),
 		}
