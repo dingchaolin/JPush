@@ -38,29 +38,21 @@ func GetNewMessage(deviceOS string, appName string, _partition int32) {
 	if partitionErr != nil {
 		log.Fatal("partitionErr===", partitionErr, config.Topic+"_" + deviceOS + "_" + appName,)
 	}
-	//fmt.Println( fmt.Sprintf("partition = %d, length = %d, %v, length = %d,", _partition, len(partition.Messages()), *<-partition.Messages(), len(partition.Messages())))
+	fmt.Println( fmt.Sprintf("partition = %d, length = %d, %v, length = %d,", _partition, len(partition.Messages()), *<-partition.Messages(), len(partition.Messages())))
 
-	for msg := range partition.Messages() {
-		fmt.Println(msg.Partition)
-	}
-	//for{
-	//
-	//	//if  len(partition.Messages()) > 0 {
-	//	//	message := *<-partition.Messages()
-	//	//	fmt.Println( fmt.Sprintf("partition = %d, val = %v, current offset = %d", _partition, string(message.Value), message.Offset))
-	//	//	continue
-	//	//}else{
-	//	//	//partition.Close()
-	//	//}
-	//	//fmt.Println( partition.Messages() , len(partition.Messages()))
-	//	//_ = *<-partition.Messages()
-	//
-	//		//message := *<-partition.Messages()
-	//		//fmt.Println( fmt.Sprintf("partition = %d, val = %v, current offset = %d", _partition, string(message.Value), message.Offset))
-	//
-	//	//fmt.Println( fmt.Sprintf("partition = %d, val = %v, current offset = %d", _partition, string(message.Value), message.Offset))
-	//
+	//for msg := range partition.Messages() {
+	//	fmt.Println(msg.Partition)
 	//}
+	for{
+
+		if  len(partition.Messages()) > 0 {
+			message := *<-partition.Messages()
+			fmt.Println( fmt.Sprintf("partition = %d, val = %v, current offset = %d", _partition, string(message.Value), message.Offset))
+		}else{
+			break //这里是个大坑
+			//partition.Close()
+		}
+	}
 
 
 

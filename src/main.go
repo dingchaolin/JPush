@@ -9,6 +9,7 @@ import (
 	//"sync"
 	"time"
 	"fmt"
+	"runtime"
 )
 
 const (
@@ -33,7 +34,7 @@ func produce( index int){
 		data = append(data, strconv.Itoa(i))
 
 	}
-	kafka.SavePushData("ios", "express", data )
+	kafka.SavePushData("anzhuo", "art", data )
 	fmt.Println("写入完成!")
 }
 
@@ -56,9 +57,18 @@ func consume_c(){
 }
 
 func main() {
+	//runtime.GOMAXPROCS(4000)
 	//produce(0)
 	consume()
 	//consume_c()
+
+	go func(){
+		//runtime.GOMAXPROCS(*numCores)
+		for {
+			fmt.Println( "----------------------------",runtime.NumGoroutine())
+			time.Sleep(time.Second*2)
+		}
+	}()
 
 	time.Sleep( time.Second * 300 )
 	//produce(3)
