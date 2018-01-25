@@ -6,6 +6,7 @@ type MysqlServerConfig struct {
 	Port int
 	User string
 	PassWord string
+	Protocol string
 }
 
 type KafakaServerConfig struct {

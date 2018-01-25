@@ -52,10 +52,12 @@ func GetNewMessage(deviceOS string, appName string, _partition int32) {
 			message := *<-partition.Messages()
 			fmt.Println( fmt.Sprintf("partition = %d, val = %v, current offset = %d", _partition, string(message.Value), message.Offset))
 		}else{
+			partition.Close()
 			break //这里是个大坑
-			//partition.Close()
+
 		}
 	}
+	return
 
 
 
