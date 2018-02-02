@@ -50,10 +50,11 @@ func TestP8(){
 		TeamID:  "HAV44L48AA",
 	}
 	notification := &apns2.Notification{}
-	notification.DeviceToken = "043acfed3ff8a1b9cdea93cb192d75a8bb660f8beca8bf54556e9ee3f60bfd6f"
+	notification.DeviceToken = "5b6a29435cf1177cfadf586812b800a5d0492882dd13f70841e3cef07d495961"
 	notification.Topic = "net.artron.artexpress"
 	notification.Payload = []byte(`{"aps":{"badge":0,"alert":{"title":"dcl标题", "body":"dcl内容"}}}`) // See Payload section below
 	//notification.Payload = paylo
+	//client := apns2.NewTokenClient(token).Development()
 	client := apns2.NewTokenClient(token)
 	res, err := client.Push(notification)
 	fmt.Println( res, err )
