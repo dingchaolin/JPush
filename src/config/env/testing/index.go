@@ -17,6 +17,6 @@ func init()  {
 
 	MysqlServerConfig = slaveConfig
 
-	KafkaServerConfig = define.KafakaServerConfig{"192.168.64.185",9092}
+	KafkaServerConfig = define.KafakaServerConfig{"192.168.10.145",39092}
 
 }

@@ -11,6 +11,9 @@ import (
 	//"fmt"
 	//"runtime"
 	//"log"
+	"fmt"
+	"strconv"
+	"kafka"
 )
 
 const (
@@ -32,16 +35,16 @@ func iosPushP8(){
 /*
 生产
  */
-//func produce( index int){
-//	fmt.Println("开始写入")
-//	data := []string{}
-//	for i := index*1000; i < (index+1)*2000; i ++ {
-//		data = append(data, strconv.Itoa(i))
-//
-//	}
-//	kafka.SavePushData("anzhuo", "art", data )
-//	fmt.Println("写入完成!")
-//}
+func produce( index int){
+	fmt.Println("开始写入")
+	data := []string{}
+	for i := index*1000; i < (index+1)*2000; i ++ {
+		data = append(data, strconv.Itoa(i))
+
+	}
+	kafka.SavePushData("anzhuo", "art", data )
+	fmt.Println("写入完成!")
+}
 //
 ///*
 //消费
@@ -92,6 +95,7 @@ func main() {
 	////time.Sleep( time.Second * 300 )
 
 	//iosPush()
-	iosPushP8()
+	//iosPushP8()
+	produce(0)
 
 }
