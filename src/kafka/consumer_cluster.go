@@ -17,7 +17,9 @@ import (
 )
 
 var consumer_c *cluster.Consumer
-var topic = "PushApiQueue__ios_express"
+var topic = "PushApiQueue__ios_express"// groupID 需要协调offset   同一个group中 公用同一个offset
+// 一个parition只能被一个consumer消费。 如果多个consumer消费同一个partition 需要协调offset
+// 多个consumer 消费同一个 topic 中的不同partition
 
 
 func init()  {
